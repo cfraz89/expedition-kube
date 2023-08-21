@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: expedition-kratos
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: expedition-kratos
+  template:
+    metadata:
+      labels:
+        app: expedition-kratos
+    spec:
+      containers:
+      - name: expedition-kratos
+        image: "expedition-kratos:latest"
+        args: ["serve", "--config", "/etc/config/kratos/kratos.yml"]
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 4433
+        - containerPort: 4434
+        env:
+        - name: METHODS_OIDC_CONFIG_PROVIDERS_0_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: expedition-kratos-google
+              key: client-secret
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: expedition-kratos
+  labels:
+    app: expedition-kratos
+spec:
+  type: NodePort
+  ports:
+  - port: 4433
+    nodePort: 30433
+    protocol: TCP
+    name: public
+  - port: 4434
+    nodePort: 30434
+    protocol: TCP
+    name: admin
+  selector:
+    app: expedition-kratos

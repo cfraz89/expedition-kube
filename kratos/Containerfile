@@ -1,0 +1,4 @@
+FROM oryd/kratos:v1.0.0
+COPY ./config/kratos.yml /etc/config/kratos/
+COPY ./config/identity.schema.json /etc/config/kratos/
+COPY ./config/google-mapper.jsonnet /etc/config/kratos/
