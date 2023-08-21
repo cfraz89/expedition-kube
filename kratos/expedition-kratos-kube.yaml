@@ -15,7 +15,7 @@ spec:
       containers:
       - name: expedition-kratos
         image: "expedition-kratos:latest"
-        args: ["serve", "--config", "/etc/config/kratos/kratos.yml"]
+        args: ["serve", "--config", "/etc/config/kratos/kratos.yaml"]
         imagePullPolicy: Never
         ports:
         - containerPort: 4433
@@ -26,8 +26,13 @@ spec:
             secretKeyRef:
               name: expedition-kratos-google
               key: client-secret
-
-
+        - name: SERVE_PUBLIC_BASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: expedition-kratos-config
+              key: serve_public_base_url
+        - name: SELFSERVICE_FLOWS_LOGIN_UI_URL
+          value: "$(SERVE_PUBLIC_BASE_URL)/login"
 ---
 apiVersion: v1
 kind: Service

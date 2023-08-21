@@ -2,7 +2,13 @@
 Set google client secret: 
 
 ```sh
-kubectl create secret generic expedition-kratos-google --from-literal=client-secret=<google client secret>
+ kubectl create secret generic expedition-kratos-google --from-file=expedition-kratos-google.secret.properties --dry-run=client -o yaml | kubectl apply -f -
+```
+
+Set urls:
+
+```sh
+ kubectl apply -f expedition-kratos-urls-local.yaml
 ```
 
 Build and import container:
