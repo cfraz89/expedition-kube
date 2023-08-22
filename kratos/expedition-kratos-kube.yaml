@@ -41,6 +41,7 @@ metadata:
   labels:
     app: expedition-kratos
 spec:
+  ipFamilyPolicy: PreferDualStack
   type: NodePort
   ports:
   - port: 4433

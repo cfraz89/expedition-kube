@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: expedition-kratos-config
 data:
-  serve_public_base_url: http://localhost:5173
+  serve_public_base_url: http://expedition.local:5173
