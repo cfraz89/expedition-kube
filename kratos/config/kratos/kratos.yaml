@@ -27,7 +27,7 @@ selfservice:
         providers:
           - id: google
             provider: google
-            client_id: 752557621983-1rpof3qgkjij8pr88kuk8nmtldh432pi.apps.googleusercontent.com
+            client_id: from-env-var
             client_secret: from-env-var
             mapper_url: file:///etc/config/kratos/google-mapper.jsonnet
 
