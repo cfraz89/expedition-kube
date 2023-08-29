@@ -6,11 +6,5 @@ Sets up ory kratos for the app's authentication needs
 Quickstart:
 
 ```sh
-nu kratos/scripts/deploy-local.nu
-```
-
-# Cluster setup commands
-Install cert-manager:
-```sh
-kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.12.0/cert-manager.yaml
+nu kratos/deploy.local install local --load-secrets
 ```

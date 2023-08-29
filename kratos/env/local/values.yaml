@@ -1,0 +1,68 @@
+kratos:
+  development: true
+  config:
+    dsn: memory
+
+    secrets:
+      default:
+        - I'm actually a super secret default secret qzFYNkUxwkP94d!V
+      cookie:
+        - Super secret cookie secret dk5uQos48ng*C^$Z
+
+    cookies:
+      domain: expedition.local.com
+
+    serve:
+      public:
+        base_url: http://identity.expedition.local.com
+        cors:
+          allowed_origins:
+            - http://expedition.local.com:5173
+      admin:
+        base_url: http://admin.identity.expedition.local.com
+
+    selfservice:
+      default_browser_return_url: http://expedition.local.com:5173/profile/welcome
+      allowed_return_urls:
+        - http://expedition.local.com:5173
+
+      flows:
+        error:
+          ui_url: http://expedition.local.com:5173/login/error
+
+        settings:
+          ui_url: http://expedition.local.com:5173/profile/settings
+
+        recovery:
+          ui_url: http://expedition.local.com:5173/login/recovery
+
+        verification:
+          ui_url: http://expedition.local.com:5173/login/verification
+          after:
+            default_browser_return_url: http://expedition.local.com:5173/profile/welcome
+
+        logout:
+          after:
+            default_browser_return_url: http://expedition.local.com:5173/login
+
+        login:
+          ui_url: http://expedition.local.com:5173/login
+
+        registration:
+          ui_url: http://expedition.local.com/registration
+
+ingress:
+  public:
+    enabled: true
+    hosts:
+      - host: identity.expedition.local.com
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+  admin:
+    enabled: true
+    hosts:
+      - host: admin.identity.expedition.local.com
+        paths:
+          - path: /
+            pathType: ImplementationSpecific

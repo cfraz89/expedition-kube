@@ -1,2 +1,3 @@
 **/*.secret.env
 **/*.secret.yaml
+kratos/env/*/secrets.yaml
