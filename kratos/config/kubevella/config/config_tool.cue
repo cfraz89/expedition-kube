@@ -1,4 +1,4 @@
-package kube
+package tool
 
 import (
 	"encoding/yaml"

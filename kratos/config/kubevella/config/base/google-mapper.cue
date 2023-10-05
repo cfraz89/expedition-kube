@@ -1,6 +1,6 @@
-package google_mapper
+package base
 
-"""
+#GoogleMapperConfig: """
 	local claims = {
 	  email_verified: true,
 	} + std.extVar('claims');
