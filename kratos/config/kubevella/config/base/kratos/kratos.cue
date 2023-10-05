@@ -2,26 +2,26 @@ package kratos
 
 version: "v0.13.0"
 
-dsn: "memory"
+dsn: string | *"memory"
 
-cookies: domain: "localhost"
+cookies: domain: string | *"localhost"
 
 serve: {
 	public: {
-		base_url: "http://localhost:4455/"
+		base_url: string | *"http://localhost:4455/"
 		cors: enabled: true
 	}
-	admin: base_url: "http://kratos:4434/"
+	admin: base_url: string | *"http://kratos:4434/"
 }
 
 selfservice: {
-	default_browser_return_url: "http://localhost:4455/ui/welcome"
+	default_browser_return_url: "\(serve.public.base_url)/ui/welcome"
 	allowed_return_urls: [
-		"http://localhost:4455",
+		serve.public.base_url,
 	]
 
 	methods: {
-		password: enabled: false
+		password: enabled: bool | *false
 		oidc: {
 			enabled: true
 			config: providers: [{
@@ -35,30 +35,30 @@ selfservice: {
 	}
 
 	flows: {
-		error: ui_url: "http://localhost:4455/ui/error"
+		error: ui_url: "\(serve.public.base_url)/ui/error"
 
 		settings: {
-			ui_url:                     "http://localhost:4455/ui/settings"
+			ui_url:                     "\(serve.public.base_url)/ui/settings"
 			privileged_session_max_age: "15m"
 		}
 
 		recovery: {
 			enabled: true
-			ui_url:  "http://localhost:4455/ui/recovery"
+			ui_url:  "\(serve.public.base_url)/ui/recovery"
 		}
 
 		verification: {
 			enabled: true
-			ui_url:  "http://localhost:4455/ui/verification"
-			after: default_browser_return_url: "http://localhost:4455/ui/welcome"
+			ui_url:  "\(serve.public.base_url)/ui/verification"
+			after: default_browser_return_url: "\(serve.public.base_url)/ui/welcome"
 		}
 
-		logout: after: default_browser_return_url: "http://localhost:4455/ui/login"
+		logout: after: default_browser_return_url: "\(serve.public.base_url)/ui/login"
 
-		login: ui_url: "http://localhost:4455/ui/login"
+		login: ui_url: "\(serve.public.base_url)/ui/login"
 
 		registration: {
-			ui_url: "http://localhost:4455/ui/registration"
+			ui_url: "\(serve.public.base_url)/ui/registration"
 			after: password: hooks: [{
 				hook: "session"
 			}]
