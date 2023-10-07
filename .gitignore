@@ -1,2 +1,3 @@
 **/*.secret.env
 **/secrets.yaml
+**/*.secret.cue
