@@ -1,1 +1,1 @@
-module: "expedition.com.au/kratos"
+module: "timoni.sh/kratos"
