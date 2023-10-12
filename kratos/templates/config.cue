@@ -29,32 +29,15 @@ import (
 	topologySpreadConstraints?: [...corev1.#TopologySpreadConstraint]
 
 	// Container
-	image:            timoniv1.#Image
-	args?:            *["serve", "--dev", "--config", "/etc/config/kratos.yaml"] | [string]
+	image: timoniv1.#Image
+	args?: [...string]
 	imagePullPolicy:  *"IfNotPresent" | string
 	resources?:       corev1.#ResourceRequirements
 	securityContext?: corev1.#SecurityContext
 
-	kratos: {
-		config: {
-			cookies: domain: "expedition.local"
-			#ui_base_url: "http://expedition.local:5173"
-
-			serve: {
-				public: {
-					base_url: "http://kratos.expedition.local"
-				}
-				admin: {
-					base_url: "http://admin.kratos.expedition.local"
-				}
-			}
-
-			_oidc_providers: google: {
-				client_id:     "hi"
-				client_secret: "secret"
-			}
-		}
-	}
+	kratos: #KratosConfig
+	identitySchema: {[string]: _}
+	configFiles: {[string]: string}
 }
 
 // Instance takes the config values and outputs the Kubernetes objects.

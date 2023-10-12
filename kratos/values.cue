@@ -7,26 +7,160 @@ package main
 
 // Defaults
 values: {
+	image: {
+		repository: "oryd/kratos"
+		tag:        "1.0"
+		digest:     ""
+	}
+	args: ["serve", "--dev", "--config", "/etc/config/kratos.yaml"]
 	kratos: {
-		config: {
-			_oidc_providers: {
-				google: {
-					client_id:     "hi"
-					client_secret: "secret"
+		version: "v1.0"
+
+		dsn: "memory"
+
+		cookies: domain: "localhost"
+
+		_ui_base_url: "http://localhost:3000"
+
+		serve: {
+			public: {
+				base_url: "http://localhost:4455/"
+				cors: enabled: true
+			}
+			admin: base_url: "http://kratos:4434/"
+		}
+
+		selfservice: {
+			default_browser_return_url: "\(_ui_base_url)/ui/welcome"
+			allowed_return_urls: [
+				serve.public.base_url,
+			]
+
+			methods: {
+				password: enabled: true
+				oidc: {
+					enabled: false
 				}
 			}
 
-			cookies: domain: "expedition.local"
-			#ui_base_url: "http://expedition.local:5173"
+			flows: {
+				error: ui_url: "\(_ui_base_url)/login/error"
 
-			serve: {
-				public: {
-					base_url: "http://kratos.expedition.local"
+				settings: {
+					ui_url:                     "\(_ui_base_url)/ui/settings"
+					privileged_session_max_age: "15m"
 				}
-				admin: {
-					base_url: "http://admin.kratos.expedition.local"
+
+				recovery: {
+					enabled: true
+					ui_url:  "\(_ui_base_url)/ui/recovery"
+				}
+
+				verification: {
+					enabled: true
+					ui_url:  "\(_ui_base_url)/ui/verification"
+					after: default_browser_return_url: "\(_ui_base_url)/ui/welcome"
+				}
+
+				logout: after: default_browser_return_url: "\(_ui_base_url)/ui/login"
+
+				login: ui_url: "\(_ui_base_url)/login"
+
+				registration: {
+					ui_url: "\(_ui_base_url)/ui/registration"
+					after: password: hooks: [{
+						hook: "session"
+					}]
 				}
 			}
 		}
+
+		log: {
+			level:  "info"
+			format: "text"
+		}
+
+		secrets: cookie: [
+			"PLEASE-CHANGE-ME-I-AM-VERY-INSECURE",
+		]
+
+		hashers: {
+			algorithm: "bcrypt"
+			bcrypt: cost: 8
+		}
+
+		identity: {
+			default_schema_id: "preset://email"
+			schemas: [{
+				id:  "preset://email"
+				url: "file:///etc/config/identity.schema.json"
+			}]
+		}
+		courier: smtp: connection_uri: "smtps://test:test@mailslurper:1025/?skip_ssl_verify=true"
 	}
+
+	identitySchema: {
+		"$id":     "https://schemas.ory.sh/presets/kratos/quickstart/email-password/identity.schema.json"
+		"$schema": "http://json-schema.org/draft-07/schema#"
+		"title":   "Person"
+		"type":    "object"
+		"properties": {
+			"traits": {
+				"type": "object"
+				"properties": {
+					"email": {
+						"type":      "string"
+						"format":    "email"
+						"title":     "E-Mail"
+						"minLength": 3
+						"ory.sh/kratos": {
+							"credentials": {
+								"password": {
+									"identifier": true
+								}
+							}
+							"verification": {
+								"via": "email"
+							}
+							"recovery": {
+								"via": "email"
+							}
+						}
+					}
+					"name": {
+						"type": "object"
+						"properties": {
+							"first": {
+								"title": "First Name"
+								"type":  "string"
+							}
+							"last": {
+								"title": "Last Name"
+								"type":  "string"
+							}
+						}
+					}
+				}
+				"required": ["email", "name"]
+				"additionalProperties": false
+			}
+		}
+	}
+	configFiles: "google-mapper.jsonnet": """
+		local claims = {
+			email_verified: true,
+		} + std.extVar('claims');
+
+		{
+			identity: {
+				traits: {
+					[if 'email' in claims && claims.email_verified then 'email' else null]: claims.email,
+					name: {
+						first: claims.given_name,
+						last: claims.family_name
+					},
+				},
+			},
+		}
+		"""
 }

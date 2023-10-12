@@ -1,103 +1,99 @@
 package templates
 
 #KratosConfig: {
-	_oidc_providers: google: {
-		client_id:     string
-		client_secret: string
-	}
-	version: "v0.13.0"
+	version: "v1.0"
 
-	dsn: string | *"memory"
+	dsn: string
 
-	cookies: domain: string | *"localhost"
+	cookies: domain: string
 
 	#ui_base_url: string
 
 	serve: {
 		public: {
-			base_url: string | *"http://localhost:4455/"
-			cors: enabled: true
+			base_url: string
+			cors: enabled: bool
 		}
-		admin: base_url: string | *"http://kratos:4434/"
+		admin: base_url: string
 	}
 
 	selfservice: {
-		default_browser_return_url: "\(#ui_base_url)/ui/welcome"
+		default_browser_return_url: string
 		allowed_return_urls: [
-			serve.public.base_url,
+			...string,
 		]
 
 		methods: {
-			password: enabled: bool | *false
+			password: enabled: bool
 			oidc: {
-				enabled:          true
-				config_providers: *[
-							{
-						google: {
-							id:            "google"
-							provider:      "google"
-							client_id:     string | _oidc_providers.google.client_id
-							client_secret: string | _oidc_providers.google.client_secret
-							mapper_url:    "file:///etc/config/google-mapper.jsonnet"
+				enabled: bool
+				config_providers: [
+					...{
+						[string]: {
+							id:            string
+							provider:      string
+							client_id:     string
+							client_secret: string
+							mapper_url:    string
 						}
 					},
-				] | [{}]
+				]
 			}
 		}
 
 		flows: {
-			error: ui_url: "\(#ui_base_url)/login/error"
+			error: ui_url: string
 
 			settings: {
-				ui_url:                     "\(#ui_base_url)/ui/settings"
-				privileged_session_max_age: "15m"
+				ui_url:                     string
+				privileged_session_max_age: string
 			}
 
 			recovery: {
-				enabled: true
-				ui_url:  "\(#ui_base_url)/ui/recovery"
+				enabled: bool
+				ui_url:  string
 			}
 
 			verification: {
-				enabled: true
-				ui_url:  "\(#ui_base_url)/ui/verification"
-				after: default_browser_return_url: "\(#ui_base_url)/ui/welcome"
+				enabled: bool
+				ui_url:  string
+				after: default_browser_return_url: string
 			}
 
-			logout: after: default_browser_return_url: "\(#ui_base_url)/ui/login"
+			logout: after: default_browser_return_url: string
 
-			login: ui_url: "\(#ui_base_url)/login"
+			login: ui_url: string
 
 			registration: {
-				ui_url: "\(#ui_base_url)/ui/registration"
-				after: password: hooks: [{
-					hook: "session"
+				ui_url: string
+				after: password: hooks: [...{
+					hook: string
 				}]
 			}
 		}
 	}
 
 	log: {
-		level:  "info"
-		format: "text"
+		level:  string
+		format: string
 	}
 
 	secrets: cookie: [
-		"PLEASE-CHANGE-ME-I-AM-VERY-INSECURE",
+		string,
 	]
 
 	hashers: {
-		algorithm: "bcrypt"
-		bcrypt: cost: 8
+		algorithm: string
+		bcrypt: cost: number
 	}
 
 	identity: {
-		default_schema_id: "preset://email"
+		default_schema_id: string
 		schemas: [{
-			id:  "preset://email"
+			id:  string
 			url: "file:///etc/config/identity.schema.json"
 		}]
 	}
 
-	courier: smtp: connection_uri: "smtps://test:test@mailslurper:1025/?skip_ssl_verify=true"
+	courier: smtp: connection_uri: string
 }

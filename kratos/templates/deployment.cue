@@ -26,7 +26,7 @@ import (
 					{
 						args:            *[] | _config.args
 						name:            _config.metadata.name
-						image:           *{reference: "oryd/kratos:v1.0.0"} | _config.image.reference
+						image:           _config.image.reference
 						imagePullPolicy: _config.imagePullPolicy
 						ports: [
 							{
