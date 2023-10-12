@@ -35,7 +35,8 @@ import (
 	resources?:       corev1.#ResourceRequirements
 	securityContext?: corev1.#SecurityContext
 
-	kratos: #KratosConfig
+	uiBaseUrl: string
+	kratos:    #ExpeditionKratosConfig & {_ui_base_url: uiBaseUrl}
 	identitySchema: {[string]: _}
 	configFiles: {[string]: string}
 }

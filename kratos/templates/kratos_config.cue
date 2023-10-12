@@ -1,13 +1,11 @@
 package templates
 
 #KratosConfig: {
-	version: "v1.0"
+	version: string
 
 	dsn: string
 
 	cookies: domain: string
-
-	#ui_base_url: string
 
 	serve: {
 		public: {
@@ -91,7 +89,7 @@ package templates
 		default_schema_id: string
 		schemas: [{
 			id:  string
-			url: "file:///etc/config/identity.schema.json"
+			url: string
 		}]
 	}
 
