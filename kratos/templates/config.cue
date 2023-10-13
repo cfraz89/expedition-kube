@@ -29,14 +29,23 @@ import (
 	topologySpreadConstraints?: [...corev1.#TopologySpreadConstraint]
 
 	// Container
-	image: timoniv1.#Image
-	args?: [...string]
+	image:            timoniv1.#Image
 	imagePullPolicy:  *"IfNotPresent" | string
 	resources?:       corev1.#ResourceRequirements
 	securityContext?: corev1.#SecurityContext
 
-	uiBaseUrl: string
-	kratos:    #ExpeditionKratosConfig & {_ui_base_url: uiBaseUrl}
+	//Kratos 
+	dev:                bool
+	uiBaseUrl:          string
+	googleClientId:     string
+	googleClientSecret: string
+
+	kratos: #ExpeditionKratosConfig & {
+		_ui_base_url:          uiBaseUrl
+		_google_client_id:     googleClientId
+		_google_client_secret: googleClientSecret
+	}
+
 	identitySchema: {[string]: _}
 	configFiles: {[string]: string}
 }

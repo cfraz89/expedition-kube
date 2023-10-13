@@ -24,7 +24,13 @@ import (
 			spec: corev1.#PodSpec & {
 				containers: [
 					{
-						args:            *[] | _config.args
+						if _config.dev {
+							args: ["serve", "--dev", "--config", "/etc/config/kratos.yaml"]
+						}
+						if !_config.dev {
+							args: ["serve", "--config", "/etc/config/kratos.yaml"]
+						}
+
 						name:            _config.metadata.name
 						image:           _config.image.reference
 						imagePullPolicy: _config.imagePullPolicy
@@ -42,6 +48,7 @@ import (
 							{
 								mountPath: "/etc/config"
 								name:      "config"
+								readOnly:  true
 							},
 						]
 						if _config.resources != _|_ {

@@ -18,8 +18,7 @@ import (
 			annotations: _config.metadata.annotations
 		}
 	}
-	immutable: true
-	data:      {
+	data: {
 		"kratos.yaml":          yaml.Marshal(_config.kratos)
 		"identity.schema.json": json.Marshal(_config.identitySchema)
 	} & _config.configFiles

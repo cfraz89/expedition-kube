@@ -9,12 +9,15 @@ package main
 values: {
 	image: {
 		repository: "oryd/kratos"
-		tag:        "1.0"
+		tag:        "v1.0.0"
 		digest:     ""
 	}
-	args: ["serve", "--dev", "--config", "/etc/config/kratos.yaml"]
 
-	uiBaseUrl: "http://localhost:3000"
+	dev:                false
+	uiBaseUrl:          "http://localhost:3000"
+	googleClientId:     ""
+	googleClientSecret: ""
+
 	kratos: {
 		dsn: "memory"
 

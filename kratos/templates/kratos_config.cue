@@ -25,15 +25,13 @@ package templates
 			password: enabled: bool
 			oidc: {
 				enabled: bool
-				config_providers: [
+				config: providers: [
 					...{
-						[string]: {
-							id:            string
-							provider:      string
-							client_id:     string
-							client_secret: string
-							mapper_url:    string
-						}
+						id:            string
+						provider:      string
+						client_id:     string
+						client_secret: string
+						mapper_url:    string
 					},
 				]
 			}

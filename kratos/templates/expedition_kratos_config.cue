@@ -4,7 +4,9 @@ package templates
 #ExpeditionKratosConfig: {
 	version: "v1.0"
 
-	_ui_base_url: string
+	_ui_base_url:          string
+	_google_client_id:     string
+	_google_client_secret: string
 
 	serve: {
 		public: {
@@ -22,6 +24,13 @@ package templates
 			password: enabled: false
 			oidc: {
 				enabled: true
+				config: providers: [{
+					id:            "google"
+					provider:      "google"
+					client_id:     _google_client_id
+					client_secret: _google_client_secret
+					mapper_url:    "file:///etc/config/google-mapper.jsonnet"
+				}]
 			}
 		}
 

@@ -1,5 +1,8 @@
 values: {
+	dev: true
+
 	uiBaseUrl: "http://expedition.local:5173"
+
 	kratos: {
 		cookies: domain: "expedition.local"
 
@@ -9,15 +12,6 @@ values: {
 			}
 			admin: {
 				base_url: "http://admin.kratos.expedition.local"
-			}
-		}
-
-		selfservice: {
-			methods: {
-				password: enabled: false
-				oidc: {
-					enabled: true
-				}
 			}
 		}
 
