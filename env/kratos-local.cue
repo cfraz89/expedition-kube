@@ -1,17 +1,18 @@
 values: {
-	dev: true
+	dev:      true
+	hostname: "identity.expedition.local.com"
 
-	uiBaseUrl: "http://expedition.local:5173"
+	uiBaseUrl: "http://expedition.local.com:5173"
 
 	kratos: {
-		cookies: domain: "expedition.local"
+		cookies: domain: "expedition.local.com"
 
 		serve: {
 			public: {
-				base_url: "http://kratos.expedition.local"
+				base_url: "http://identity.expedition.local.com"
 			}
 			admin: {
-				base_url: "http://admin.kratos.expedition.local"
+				base_url: "http://identity.expedition.local.com/admin"
 			}
 		}
 

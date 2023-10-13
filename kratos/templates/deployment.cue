@@ -6,12 +6,12 @@ import (
 )
 
 #Deployment: appsv1.#Deployment & {
-	_config:    #Config
-	_cmName:    string
-	apiVersion: "apps/v1"
-	kind:       "Deployment"
-	metadata:   _config.metadata
-	spec:       appsv1.#DeploymentSpec & {
+	_config:        #Config
+	_configMapName: string
+	apiVersion:     "apps/v1"
+	kind:           "Deployment"
+	metadata:       _config.metadata
+	spec:           appsv1.#DeploymentSpec & {
 		replicas: _config.replicas
 		selector: matchLabels: _config.selector.labels
 		template: {
@@ -62,7 +62,7 @@ import (
 				volumes: [
 					{
 						name: "config"
-						configMap: name: _cmName
+						configMap: name: _configMapName
 					},
 				]
 				if _config.podSecurityContext != _|_ {

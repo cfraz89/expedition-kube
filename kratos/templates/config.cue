@@ -36,11 +36,12 @@ import (
 
 	//Kratos 
 	dev:                bool
+	hostname:           string
 	uiBaseUrl:          string
 	googleClientId:     string
 	googleClientSecret: string
 
-	kratos: #ExpeditionKratosConfig & {
+	kratos: #KratosConfig & {
 		_ui_base_url:          uiBaseUrl
 		_google_client_id:     googleClientId
 		_google_client_secret: googleClientSecret
@@ -55,12 +56,13 @@ import (
 	config: #Config
 
 	objects: {
-		svc: #Service & {_config:   config}
-		cm:  #ConfigMap & {_config: config}
+		svc:     #Service & {_config:   config}
+		cm:      #ConfigMap & {_config: config}
+		ingress: #Ingress & {_config:   config}
 
 		deploy: #Deployment & {
-			_config: config
-			_cmName: objects.cm.metadata.name
+			_config:        config
+			_configMapName: cm.metadata.name
 		}
 	}
 }

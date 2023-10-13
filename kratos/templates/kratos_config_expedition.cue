@@ -1,7 +1,6 @@
 package templates
 
-#ExpeditionKratosConfig: #KratosConfig
-#ExpeditionKratosConfig: {
+#KratosConfig: {
 	version: "v1.0"
 
 	_ui_base_url:          string
