@@ -8,11 +8,16 @@ package main
 // Defaults
 values: {
 	image: {
-		repository: "surrealdb/surrealdb"
+		repository: "expedition-backend"
 		tag:        "latest"
 		digest:     ""
 	}
-	service: port: 8000
-	user:     "root"
-	password: "root"
+
+	googleApiKey: ""
+
+	surreal: {
+		uri:      "expedition-surreal:8000"
+		user:     "root"
+		password: "root"
+	}
 }
