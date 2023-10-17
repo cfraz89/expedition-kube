@@ -15,11 +15,11 @@ import (
 		ports: [{
 			name:       "public"
 			port:       4433
-			targetPort: 4433
+			targetPort: name
 		}, {
 			name:       "admin"
 			port:       4434
-			targetPort: 4434
+			targetPort: name
 		}]
 	}
 }

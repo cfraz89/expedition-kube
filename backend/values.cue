@@ -12,6 +12,7 @@ values: {
 		tag:        "latest"
 		digest:     ""
 	}
+	imagePullPolicy: "Never"
 
 	googleApiKey: ""
 
@@ -20,4 +21,6 @@ values: {
 		user:     "root"
 		password: "root"
 	}
+
+	hostname: "backend.expedition.local.com"
 }

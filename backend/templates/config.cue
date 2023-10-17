@@ -43,7 +43,10 @@ import (
 	securityContext?: corev1.#SecurityContext
 
 	// Service
-	service: port: *80 | int & >0 & <=65535
+	service: port: *3000 | int & >0 & <=65535
+
+	//Ingress
+	hostname: string
 }
 
 // Instance takes the config values and outputs the Kubernetes objects.
@@ -51,6 +54,8 @@ import (
 	config: #Config
 
 	objects: {
+		ingress: #Ingress & {_config: config}
+
 		svc: #Service & {_config: config}
 
 		deploy: #Deployment & {

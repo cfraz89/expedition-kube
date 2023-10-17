@@ -34,6 +34,12 @@ import (
 	resources?:       corev1.#ResourceRequirements
 	securityContext?: corev1.#SecurityContext
 
+	// Service
+	service: {
+		publicPort: *4433 | int & >0 & <=65535
+		adminPort:  *4434 | int & >0 & <=65535
+	}
+
 	//Kratos 
 	dev:                bool
 	hostname:           string

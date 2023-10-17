@@ -49,7 +49,7 @@ import (
 							},
 							{
 								name:  "EXPEDITION_GOOGLE_API_KEY"
-								value: _config.googleApiKeys
+								value: _config.googleApiKey
 							},
 						]
 						if _config.resources != _|_ {
