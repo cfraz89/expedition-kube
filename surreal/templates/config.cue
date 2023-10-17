@@ -35,7 +35,7 @@ import (
 	securityContext?: corev1.#SecurityContext
 
 	// Service
-	service: port: *80 | int & >0 & <=65535
+	service: port: *8000 | int & >0 & <=65535
 
 	// Surreal
 	user:     string
