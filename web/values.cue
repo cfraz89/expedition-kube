@@ -17,7 +17,7 @@ values: {
 	mapboxAccessToken: ""
 	googleApiKey:      ""
 	origins: {
-		backend: "backend.expedition.local.com"
-		kratos:  "identity.expedition.local.com"
+		backend: "http://backend.expedition.local.com"
+		kratos:  "http://identity.expedition.local.com"
 	}
 }
