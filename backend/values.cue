@@ -23,4 +23,6 @@ values: {
 	}
 
 	hostname: "backend.expedition.local.com"
+
+	rustLog: "debug"
 }

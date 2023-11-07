@@ -50,6 +50,10 @@ import (
 								name:  "EXPEDITION_GOOGLE_API_KEY"
 								value: _config.googleApiKey
 							},
+							{
+								name:  "RUST_LOG"
+								value: _config.rustLog
+							},
 						]
 						if _config.resources != _|_ {
 							resources: _config.resources

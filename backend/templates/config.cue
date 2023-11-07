@@ -24,6 +24,7 @@ import (
 		user:     string
 		password: string
 	}
+	rustLog?: "debug" | "info" | "trace" | "verbose" | "warn"
 
 	// Deployment
 	replicas: *1 | int & >0
