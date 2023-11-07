@@ -27,7 +27,7 @@ values: {
 		serve: {
 			public: {
 				base_url: "http://localhost:4455/"
-				cors: enabled: true
+				cors: enabled: false
 			}
 			admin: base_url: "http://kratos:4434/"
 		}

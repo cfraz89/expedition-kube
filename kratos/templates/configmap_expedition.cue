@@ -30,21 +30,16 @@ package templates
 								}
 							}
 						}
-						"name": {
-							"type": "object"
-							"properties": {
-								"first": {
-									"title": "First Name"
-									"type":  "string"
-								}
-								"last": {
-									"title": "Last Name"
-									"type":  "string"
-								}
-							}
+						"first_name": {
+							"type":  "string"
+							"title": "First Name"
+						}
+						"last_name": {
+							"type":  "string"
+							"title": "Last Name"
 						}
 					}
-					"required": ["email", "name"]
+					"required": ["email"]
 					"additionalProperties": false
 				}
 			}
@@ -58,10 +53,8 @@ package templates
 				identity: {
 					traits: {
 						[if 'email' in claims && claims.email_verified then 'email' else null]: claims.email,
-						name: {
-							first: claims.given_name,
-							last: claims.family_name
-						},
+						[if 'given_name' in claims then 'first_name' else null]:  claims.given_name,
+						[if 'family_name' in claims then 'last_name' else null]: claims.family_name
 					},
 				},
 			}

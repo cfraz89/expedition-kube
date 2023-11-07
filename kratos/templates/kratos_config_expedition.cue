@@ -14,7 +14,7 @@ package templates
 	}
 
 	selfservice: {
-		default_browser_return_url: "\(_ui_base_url)/ui/welcome"
+		default_browser_return_url: "\(_ui_base_url)"
 		allowed_return_urls: [
 			serve.public.base_url,
 		]
@@ -29,6 +29,7 @@ package templates
 					client_id:     _google_client_id
 					client_secret: _google_client_secret
 					mapper_url:    "file:///etc/config/google-mapper.jsonnet"
+					scope: ["email", "profile"]
 				}]
 			}
 		}
@@ -49,7 +50,7 @@ package templates
 			verification: {
 				enabled: true
 				ui_url:  "\(_ui_base_url)/ui/verification"
-				after: default_browser_return_url: "\(_ui_base_url)/ui/welcome"
+				after: default_browser_return_url: "\(_ui_base_url)"
 			}
 
 			logout: after: default_browser_return_url: "\(_ui_base_url)/ui/login"
@@ -57,10 +58,15 @@ package templates
 			login: ui_url: "\(_ui_base_url)/login"
 
 			registration: {
-				ui_url: "\(_ui_base_url)/ui/registration"
-				after: password: hooks: [{
-					hook: "session"
-				}]
+				ui_url: "\(_ui_base_url)/registration"
+				after: {
+					password: hooks: [{
+						hook: "session"
+					}]
+					oidc: hooks: [{
+						hook: "session"
+					}]
+				}
 			}
 		}
 	}
