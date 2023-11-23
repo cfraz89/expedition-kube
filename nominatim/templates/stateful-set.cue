@@ -5,15 +5,17 @@ import (
 	corev1 "k8s.io/api/core/v1"
 )
 
-#Deployment: appsv1.#Deployment & {
-	_config:    #Config
+#StatefulSet: appsv1.#StatefulSet & {
+	_config: #Config
+	let postgresPvcName = "\(_config.metadata.name)-postgres-pvc"
 	_cmName:    string
 	apiVersion: "apps/v1"
-	kind:       "Deployment"
+	kind:       "StatefulSet"
 	metadata:   _config.metadata
-	spec:       appsv1.#DeploymentSpec & {
+	spec:       appsv1.#StatefulSetSpec & {
 		replicas: _config.replicas
 		selector: matchLabels: _config.selector.labels
+		serviceName: _config.metadata.name
 		template: {
 			metadata: {
 				labels: _config.selector.labels
@@ -27,22 +29,27 @@ import (
 						name:            _config.metadata.name
 						image:           _config.image.reference
 						imagePullPolicy: _config.imagePullPolicy
-						args:
-						[
-							"start",
-							"--log",
-							"trace",
-							"--user",
-							_config.user,
-							"--pass",
-							_config.password,
-							"memory",
-						]
 						ports: [
 							{
-								name:          "surreal"
-								containerPort: 8000
+								name:          "nominatim"
+								containerPort: 8080
 								protocol:      "TCP"
+							},
+						]
+						env: [
+							{
+								name:  "PBF_URL"
+								value: _config.pbfUrl
+							},
+							{
+								name:  "REPLICATION_URL"
+								value: _config.replicationUrl
+							},
+						]
+						volumeMounts: [
+							{
+								mountPath: "/var/lib/postgresql/14/main"
+								name:      postgresPvcName
 							},
 						]
 						if _config.resources != _|_ {
@@ -70,5 +77,12 @@ import (
 				}
 			}
 		}
+		volumeClaimTemplates: [{
+			metadata: name: postgresPvcName
+			spec: {
+				accessModes: ["ReadWriteOnce"]
+				resources: requests: storage: 10Gi
+			}
+		}]
 	}
 }

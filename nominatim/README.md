@@ -1,13 +1,13 @@
-# surreal
+# nominatim
 
-A [timoni.sh](http://timoni.sh) module for deploying surreal to Kubernetes clusters.
+A [timoni.sh](http://timoni.sh) module for deploying nominatim to Kubernetes clusters.
 
 ## Install
 
 To create an instance using the default values:
 
 ```shell
-timoni -n default apply surreal oci://<container-registry-url>
+timoni -n default apply nominatim oci://<container-registry-url>
 ```
 
 To change the [default configuration](#configuration),
@@ -27,7 +27,7 @@ values: {
 And apply the values with:
 
 ```shell
-timoni -n default apply surreal oci://<container-registry-url> \
+timoni -n default apply nominatim oci://<container-registry-url> \
 --values ./my-values.cue
 ```
 
@@ -36,7 +36,7 @@ timoni -n default apply surreal oci://<container-registry-url> \
 To uninstall an instance and delete all its Kubernetes resources:
 
 ```shell
-timoni -n default delete surreal
+timoni -n default delete nominatim
 ```
 
 ## Configuration
@@ -44,7 +44,7 @@ timoni -n default delete surreal
 ### General values
 
 | Key                          | Type                                    | Default                    | Description                                                                                                                                  |
-|------------------------------|-----------------------------------------|----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| ---------------------------- | --------------------------------------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | `image: tag:`                | `string`                                | `<latest version>`         | Container image tag                                                                                                                          |
 | `image: digest:`             | `string`                                | `<latest digest>`          | Container image digest, takes precedence over `tag` when specified                                                                           |
 | `image: repository:`         | `string`                                | `cgr.dev/chainguard/nginx` | Container image repository                                                                                                                   |

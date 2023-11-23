@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	templates "timoni.sh/surreal/templates"
+	templates "timoni.sh/nominatim/templates"
 )
 
 // Define the schema for the user-supplied values.

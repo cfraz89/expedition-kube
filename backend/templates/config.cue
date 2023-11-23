@@ -19,11 +19,7 @@ import (
 
 	// App settings
 	googleApiKey: string
-	surreal: {
-		uri:      string
-		user:     string
-		password: string
-	}
+
 	rustLog?: "debug" | "info" | "trace" | "verbose" | "warn"
 
 	// Deployment

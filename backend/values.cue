@@ -16,12 +16,6 @@ values: {
 
 	googleApiKey: ""
 
-	surreal: {
-		uri:      "expedition-surreal:8000"
-		user:     "root"
-		password: "root"
-	}
-
 	hostname: "backend.expedition.local.com"
 
 	rustLog: "debug"

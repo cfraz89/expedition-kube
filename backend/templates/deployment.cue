@@ -35,18 +35,6 @@ import (
 						]
 						env: [
 							{
-								name:  "EXPEDITION_SURREAL_URI"
-								value: _config.surreal.uri
-							},
-							{
-								name:  "EXPEDITION_SURREAL_USER"
-								value: _config.surreal.user
-							},
-							{
-								name:  "EXPEDITION_SURREAL_PASS"
-								value: _config.surreal.password
-							},
-							{
 								name:  "EXPEDITION_GOOGLE_API_KEY"
 								value: _config.googleApiKey
 							},

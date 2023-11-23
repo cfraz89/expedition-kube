@@ -16,7 +16,7 @@ import (
 			{
 				port:       _config.service.port
 				protocol:   "TCP"
-				name:       "surreal"
+				name:       "nominatim"
 				targetPort: name
 			},
 		]
