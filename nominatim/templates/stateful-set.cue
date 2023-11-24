@@ -45,6 +45,10 @@ import (
 								name:  "REPLICATION_URL"
 								value: _config.replicationUrl
 							},
+							{
+								name:  "IMPORT_STYLE"
+								value: "extratags"
+							},
 						]
 						volumeMounts: [
 							{
