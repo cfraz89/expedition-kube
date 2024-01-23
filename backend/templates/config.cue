@@ -18,6 +18,7 @@ import (
 	selector: timoniv1.#Selector & {#Name: metadata.name}
 
 	// App settings
+	databaseUrl:  string
 	googleApiKey: string
 
 	rustLog?: "debug" | "info" | "trace" | "verbose" | "warn"
@@ -26,10 +27,10 @@ import (
 	replicas: *1 | int & >0
 
 	// Pod
-	podAnnotations?: {[ string]: string}
+	podAnnotations?: {[string]: string}
 	podSecurityContext?: corev1.#PodSecurityContext
 	imagePullSecrets?: [...corev1.LocalObjectReference]
-	tolerations?: [ ...corev1.#Toleration]
+	tolerations?: [...corev1.#Toleration]
 	affinity?: corev1.#Affinity
 	topologySpreadConstraints?: [...corev1.#TopologySpreadConstraint]
 

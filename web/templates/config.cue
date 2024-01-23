@@ -17,17 +17,14 @@ import (
 	// Label selector (common to all resources)
 	selector: timoniv1.#Selector & {#Name: metadata.name}
 
-	// App settings
-	message: string
-
 	// Deployment
 	replicas: *1 | int & >0
 
 	// Pod
-	podAnnotations?: {[ string]: string}
+	podAnnotations?: {[string]: string}
 	podSecurityContext?: corev1.#PodSecurityContext
 	imagePullSecrets?: [...corev1.LocalObjectReference]
-	tolerations?: [ ...corev1.#Toleration]
+	tolerations?: [...corev1.#Toleration]
 	affinity?: corev1.#Affinity
 	topologySpreadConstraints?: [...corev1.#TopologySpreadConstraint]
 
@@ -58,7 +55,7 @@ import (
 
 	objects: {
 		ingress: #Ingress & {_config: config}
-		svc:     #Service & {_config: config}
+		svc: #Service & {_config: config}
 
 		deploy: #Deployment & {
 			_config: config

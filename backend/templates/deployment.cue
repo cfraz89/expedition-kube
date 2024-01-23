@@ -10,7 +10,7 @@ import (
 	apiVersion: "apps/v1"
 	kind:       "Deployment"
 	metadata:   _config.metadata
-	spec:       appsv1.#DeploymentSpec & {
+	spec: appsv1.#DeploymentSpec & {
 		replicas: _config.replicas
 		selector: matchLabels: _config.selector.labels
 		template: {
@@ -41,6 +41,10 @@ import (
 							{
 								name:  "RUST_LOG"
 								value: _config.rustLog
+							},
+							{
+								name:  "DATABASE_URL"
+								value: _config.databaseUrl
 							},
 						]
 						if _config.resources != _|_ {
