@@ -1,10 +1,15 @@
 # Expedition-kube
-Contains everything necessary to set up a kube cluster running the api
+Contains everything necessary to set up a kube cluster running Expedition. Composed of timoni modules.
+![screenshot](/expedition.png "screenshot")
 
-# /kratos
-Sets up ory kratos for the app's authentication needs
-Quickstart:
+# kratos
+ory kratos for the app's authentication needs
 
-```sh
-nu kratos/deploy.local install local --load-secrets
-```
+# nominatom
+nominatim used for reverse geocoding street names and surfaces
+
+# backend
+Application Rust backend
+
+# web
+Sveltekit frontend
